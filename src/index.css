@@ -40,11 +40,9 @@
 
 .ember {
   position: absolute;
-  width: 4px;
-  height: 4px;
   background: #f4a638;
   border-radius: 50%;
   pointer-events: none;
   animation: float 8s ease-in-out infinite;
-  box-shadow: 0 0 10px #f4a638, 0 0 20px #c77b35;
+  box-shadow: 0 0 10px #f4a638, 0 0 20px #c77b35, 0 0 30px rgba(199, 123, 53, 0.3);
 }
