@@ -1,0 +1,253 @@
+{
+  "site": {
+    "name": "IMMERSEFORGE",
+    "tagline": "We Don't Create Events. We Engineer Obsession.",
+    "description": "An elite experiential agency forging immersive brand experiences that don't just capture attention—they create lasting memory.",
+    "subheadline": "Experiential Architecture for Brands That Refuse to Be Forgotten",
+    "contact": {
+      "email": "forge@immerseforge.com",
+      "phone": "+1 (310) 555-FORGE",
+      "location": "Los Angeles • New York • Denver"
+    },
+    "social": {
+      "instagram": "https://instagram.com/immerseforge",
+      "linkedin": "https://linkedin.com/company/immerseforge",
+      "twitter": "https://twitter.com/immerseforge"
+    }
+  },
+  "pages": {
+    "home": {
+      "hero": {
+        "tagline": "EXPERIENTIAL ARCHITECTURE",
+        "title": ["FORGE", "THE", "UNFORGETTABLE"],
+        "subtitle": "We engineer moments that matter. Multi-sensory brand experiences that create lasting impressions and drive real results.",
+        "cta": "START A PROJECT",
+        "secondaryCta": "VIEW OUR WORK"
+      },
+      "manifesto": {
+        "label": "OUR APPROACH",
+        "title": "In a World of Noise, We Create Impact.",
+        "description": "Every experience we forge is designed to stop people mid-scroll, mid-step, mid-thought. We architect environments so immersive, so visceral, so perfectly calibrated that they become impossible to ignore and impossible to forget. From Fortune 500 activations to intimate VIP experiences, we deliver results that matter.",
+        "stats": [
+          { "value": "94%", "label": "Client Satisfaction" },
+          { "value": "89%", "label": "Avg Engagement Rate" },
+          { "value": "500%+", "label": "Typical ROI" }
+        ]
+      },
+      "clients": {
+        "label": "TRUSTED BY INDUSTRY LEADERS",
+        "logos": ["Netflix", "Apple", "Google", "Microsoft", "MrBeast", "Formula 1", "Williams Racing", "TED"]
+      },
+      "services": [
+        {
+          "id": 1,
+          "title": "BRAND ACTIVATIONS",
+          "subtitle": "Immersive Experiences",
+          "description": "From trade show domination to pop-up experiences, we create environments that embody your brand at every touchpoint. Walk in curious, walk out converted.",
+          "icon": "Layers",
+          "stats": "50+ Major Activations"
+        },
+        {
+          "id": 2,
+          "title": "EXPERIENTIAL PRODUCTION",
+          "subtitle": "End-to-End Execution",
+          "description": "Full-service production from concept to completion. Venue coordination, permitting, logistics, staffing, and flawless on-site execution.",
+          "icon": "Sparkles",
+          "stats": "100+ Events Produced"
+        },
+        {
+          "id": 3,
+          "title": "VIP EXPERIENCES",
+          "subtitle": "Premium Brand Moments",
+          "description": "Exclusive experiences for your most valuable audiences. Multi-day retreats, influencer activations, and premium brand journeys that create advocates.",
+          "icon": "Compass",
+          "stats": "150+ VIP Events"
+        },
+        {
+          "id": 4,
+          "title": "BRAND AMBASSADORS",
+          "subtitle": "Human Brand Extensions",
+          "description": "Our teams aren't just staff—they're trained brand extensions. Product specialists, event managers, and experience guides who embody your narrative.",
+          "icon": "Users",
+          "stats": "1,000+ Trained Staff"
+        }
+      ],
+      "stats": [
+        { "value": "50", "label": "Major Brand Partners", "suffix": "+" },
+        { "value": "2.5", "label": "People Reached", "suffix": "M+" },
+        { "value": "94", "label": "Client Retention", "suffix": "%" },
+        { "value": "15", "label": "Markets Served", "suffix": "+" }
+      ],
+      "featured": {
+        "label": "SELECTED WORK",
+        "title": "Results That Speak",
+        "projects": [
+          {
+            "id": 1,
+            "title": "NETFLIX PREMIERE EXPERIENCE",
+            "client": "Netflix",
+            "category": "Immersive Pop-Up",
+            "description": "Multi-sensory pop-up activation that transported fans into the world of a hit series. Full immersive environment with trained character actors and interactive elements.",
+            "result": "47,000+ visitors. 2.3M social impressions. 94% satisfaction rate.",
+            "image": "images/case-studies/netflix.jpg"
+          },
+          {
+            "id": 2,
+            "title": "APPLE VIP RETREAT",
+            "client": "Apple",
+            "category": "Exclusive Experience",
+            "description": "Ultra-exclusive 3-day experiential retreat for top developers and creative professionals. Luxury outdoor experience with integrated product demonstrations.",
+            "result": "150 VIP guests. 100% satisfaction. $12M earned media value.",
+            "image": "images/case-studies/apple-vip.jpg"
+          },
+          {
+            "id": 3,
+            "title": "MICROSOFT NRF ACTIVATION",
+            "client": "Microsoft",
+            "category": "Trade Show Domination",
+            "description": "Immersive HoloLens demonstration activation at NRF Big Show. Specialized tech ambassadors and interactive demo stations driving unprecedented engagement.",
+            "result": "2,847 qualified leads. 89% engagement. 156 C-suite demos.",
+            "image": "images/case-studies/microsoft.jpg"
+          }
+        ]
+      },
+      "quote": {
+        "text": "The experiential deliverables and flawless event management made this our most impactful partner event ever. They don't just execute—they elevate.",
+        "author": "Brand Partner",
+        "role": "VP Marketing, Fortune 500 Tech Company",
+        "company": "Confidential"
+      },
+      "process": {
+        "label": "THE FORGE METHOD",
+        "title": "How We Build Impact",
+        "steps": [
+          {
+            "number": "01",
+            "title": "DISCOVER",
+            "description": "We dig deep. Past your brand guidelines into your brand's soul. We uncover the raw material—the truth that resonates with your audience."
+          },
+          {
+            "number": "02",
+            "title": "DESIGN",
+            "description": "Ideas take shape. We prototype experiences through immersive storyboards, 3D visualizations, and detailed production planning."
+          },
+          {
+            "number": "03",
+            "title": "DELIVER",
+            "description": "Execution without compromise. Our production team orchestrates every detail—from venue logistics to staff training—into a unified experience."
+          },
+          {
+            "number": "04",
+            "title": "MEASURE",
+            "description": "Real results, not vanity metrics. Every touchpoint is measured for engagement, brand impact, and ROI. We prove the value we create."
+          }
+        ]
+      },
+      "cta": {
+        "title": "Ready to Create Something Unforgettable?",
+        "subtitle": "Let's discuss how we can bring your brand vision to life.",
+        "buttonText": "START THE CONVERSATION",
+        "note": "We work with brands committed to excellence."
+      }
+    },
+    "work": {
+      "title": "Selected Work",
+      "label": "Our Portfolio",
+      "projects": [
+        {
+          "id": 1,
+          "title": "Netflix Premiere Experience",
+          "client": "Netflix",
+          "category": "Immersive Pop-Up",
+          "description": "Multi-sensory pop-up activation for a major series premiere.",
+          "results": ["47,000+ visitors", "2.3M impressions", "94% satisfaction"]
+        },
+        {
+          "id": 2,
+          "title": "Apple VIP Retreat",
+          "client": "Apple",
+          "category": "Exclusive Experience",
+          "description": "3-day luxury retreat for top developers and creative professionals.",
+          "results": ["150 VIP guests", "$12M earned media", "100% satisfaction"]
+        },
+        {
+          "id": 3,
+          "title": "Microsoft NRF Activation",
+          "client": "Microsoft",
+          "category": "Trade Show",
+          "description": "Immersive HoloLens demonstration activation at National Retail Federation.",
+          "results": ["2,847 leads", "89% engagement", "847% ROI"]
+        }
+      ]
+    },
+    "about": {
+      "title": "Architects of Impact",
+      "label": "Who We Are",
+      "quote": "We exist at the intersection of creativity and execution, forging moments that create lasting brand connections.",
+      "forgeMethod": {
+        "title": "The Forge Method",
+        "description": "Our process is proven. We've developed it over years of executing for the world's most demanding brands. We dig deep into the brand psyche to find the raw material—the truth that resonates. Then we apply expertise, creativity, and flawless execution."
+      },
+      "capabilities": [
+        "Brand Activations",
+        "Trade Show Production",
+        "Pop-Up Experiences",
+        "VIP Events",
+        "Product Launches",
+        "Festival Activations",
+        "Experiential Campaigns",
+        "Brand Ambassador Programs"
+      ],
+      "leadership": [
+        {
+          "name": "Executive Team",
+          "nickname": "The Architects",
+          "title": "Leadership",
+          "bio": "Our leadership team brings decades of combined experience in experiential marketing, event production, and brand strategy. We've worked with Fortune 500 companies and innovative startups alike."
+        }
+      ]
+    }
+  },
+  "assets": {
+    "images": {
+      "hero_background": "stock_images/dark_industrial_ware_41aa92fe.jpg",
+      "case_study_1": "images/case-studies/netflix.jpg",
+      "case_study_2": "images/case-studies/apple-vip.jpg",
+      "case_study_3": "images/case-studies/microsoft.jpg",
+      "studio_process": "images/case-studies/formula-1.jpg"
+    },
+    "videos": {
+      "hero_video": ""
+    }
+  },
+  "design": {
+    "colors": {
+      "black": "#050505",
+      "charcoal": "#0a0a0a",
+      "charcoal_light": "#151515",
+      "charcoal_medium": "#1a1a1a",
+      "copper": "#c77b35",
+      "copper_light": "#d4915a",
+      "amber": "#f4a638",
+      "cream": "#f5ede4",
+      "cream_muted": "rgba(245, 237, 228, 0.7)",
+      "white": "#ffffff"
+    },
+    "fonts": {
+      "display": "Bebas Neue",
+      "mono": "Space Mono",
+      "serif": "Cormorant Garamond"
+    }
+  },
+  "navigation": [
+    { "label": "Work", "href": "/work" },
+    { "label": "About", "href": "/about" },
+    { "label": "Services", "href": "/#services" },
+    { "label": "Contact", "href": "/#contact" }
+  ],
+  "footer": {
+    "services": ["Brand Activations", "Experiential Production", "VIP Experiences", "Brand Ambassadors"],
+    "company": ["About", "Our Work", "Careers", "Contact"],
+    "legal": ["Privacy Policy", "Terms of Service"]
+  }
+}
