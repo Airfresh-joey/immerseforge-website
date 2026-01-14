@@ -1,9 +1,23 @@
 import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+import { Link } from 'wouter';
 import type { WebsiteContent } from '../hooks/useWebsiteContent';
 
 interface AboutProps {
   content: WebsiteContent;
 }
+
+// Capability to route mapping
+const capabilityRoutes: Record<string, string> = {
+  'Brand Activations': '/services/brand-activations',
+  'Trade Show Production': '/services/trade-show-production',
+  'Pop-Up Experiences': '/services/pop-up-experiences',
+  'VIP Events': '/services/vip-events',
+  'Product Launches': '/services/product-launches',
+  'Festival Activations': '/services/festival-activations',
+  'Experiential Campaigns': '/services/experiential-campaigns',
+  'Brand Ambassador Programs': '/services/brand-ambassador-programs',
+};
 
 export const About = ({ content }: AboutProps) => {
   const { about } = content.pages;
@@ -63,20 +77,26 @@ export const About = ({ content }: AboutProps) => {
               Our Capabilities
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-              {about.capabilities.map((capability: string, index: number) => (
-                <motion.div
-                  key={index}
-                  className="p-6 bg-charcoal-light border border-copper/20 hover:border-copper/40 transition-colors text-center"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                >
-                  <span className="font-mono text-sm text-cream">
-                    {capability}
-                  </span>
-                </motion.div>
-              ))}
+              {about.capabilities.map((capability: string, index: number) => {
+                const route = capabilityRoutes[capability] || '/services/brand-activations';
+                return (
+                  <Link key={index} href={route}>
+                    <motion.div
+                      className="group p-6 bg-charcoal-light border border-copper/20 hover:border-copper/40 hover:bg-copper/5 transition-all text-center cursor-pointer"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.05 }}
+                      whileHover={{ y: -3 }}
+                    >
+                      <span className="font-mono text-sm text-cream group-hover:text-copper transition-colors">
+                        {capability}
+                      </span>
+                      <ArrowRight className="w-4 h-4 text-copper mx-auto mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </motion.div>
+                  </Link>
+                );
+              })}
             </div>
           </motion.div>
         </div>

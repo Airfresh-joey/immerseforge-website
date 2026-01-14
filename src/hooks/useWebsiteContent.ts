@@ -8,6 +8,7 @@ export interface WebsiteContent {
     subheadline: string;
     contact: {
       email: string;
+      phone?: string;
       location: string;
     };
     social: {

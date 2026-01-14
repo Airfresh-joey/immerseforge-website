@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform, useInView, useMotionValue, useSpring, 
 import { ArrowRight, Layers, Sparkles, Compass, Users, Quote, ChevronDown, Star } from 'lucide-react';
 import type { WebsiteContent } from '../hooks/useWebsiteContent';
 import { useRef, useEffect, useState } from 'react';
+import { Link } from 'wouter';
 
 // Ember particle component
 const Ember = ({ delay, left, bottom, size = 4 }: { delay: number; left: string; bottom: string; size?: number }) => (
@@ -92,6 +93,14 @@ const iconMap: Record<string, React.ComponentType<{ className?: string; size?: n
   Sparkles,
   Compass,
   Users,
+};
+
+// Service to route mapping
+const serviceRoutes: Record<string, string> = {
+  'BRAND ACTIVATIONS': '/services/brand-activations',
+  'EXPERIENTIAL PRODUCTION': '/services/experiential-campaigns',
+  'VIP EXPERIENCES': '/services/vip-events',
+  'BRAND AMBASSADORS': '/services/brand-ambassador-programs',
 };
 
 export const Home = ({ content }: HomeProps) => {
@@ -507,45 +516,48 @@ export const Home = ({ content }: HomeProps) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {home.services.map((service: any, index: number) => {
               const Icon = iconMap[service.icon];
+              const serviceRoute = serviceRoutes[service.title] || '/services/brand-activations';
               return (
-                <motion.div
-                  key={service.id}
-                  className="group relative p-8 md:p-10 rounded-lg bg-gradient-to-br from-charcoal/80 to-charcoal/40 border border-white/5 hover:border-copper/30 transition-all duration-500 overflow-hidden"
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -5 }}
-                >
-                  {/* Hover Glow */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-copper/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <Link key={service.id} href={serviceRoute}>
+                  <motion.div
+                    className="group relative p-8 md:p-10 rounded-lg bg-gradient-to-br from-charcoal/80 to-charcoal/40 border border-white/5 hover:border-copper/30 transition-all duration-500 overflow-hidden cursor-pointer h-full"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ y: -5 }}
+                  >
+                    {/* Hover Glow */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-copper/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                  <div className="relative flex items-start gap-6">
-                    <div className="flex-shrink-0">
-                      <motion.div
-                        className="w-14 h-14 flex items-center justify-center rounded-lg bg-copper/10 border border-copper/20 group-hover:bg-copper/20 group-hover:border-copper/40 transition-all duration-500"
-                        whileHover={{ rotate: 5, scale: 1.1 }}
-                      >
-                        {Icon && <Icon className="text-copper" size={24} />}
-                      </motion.div>
-                    </div>
-                    <div className="flex-1">
-                      <div className="font-mono text-[10px] tracking-[0.2em] text-cream/40 uppercase mb-2">
-                        {service.subtitle}
+                    <div className="relative flex items-start gap-6">
+                      <div className="flex-shrink-0">
+                        <motion.div
+                          className="w-14 h-14 flex items-center justify-center rounded-lg bg-copper/10 border border-copper/20 group-hover:bg-copper/20 group-hover:border-copper/40 transition-all duration-500"
+                          whileHover={{ rotate: 5, scale: 1.1 }}
+                        >
+                          {Icon && <Icon className="text-copper" size={24} />}
+                        </motion.div>
                       </div>
-                      <h3 className="text-xl md:text-2xl font-display text-cream mb-3 group-hover:text-copper transition-colors duration-300">
-                        {service.title}
-                      </h3>
-                      <p className="text-cream/50 leading-relaxed text-sm mb-4">
-                        {service.description}
-                      </p>
-                      <span className="inline-flex items-center gap-2 font-mono text-xs text-copper/70">
-                        <span className="w-8 h-[1px] bg-copper/50" />
-                        {service.stats}
-                      </span>
+                      <div className="flex-1">
+                        <div className="font-mono text-[10px] tracking-[0.2em] text-cream/40 uppercase mb-2">
+                          {service.subtitle}
+                        </div>
+                        <h3 className="text-xl md:text-2xl font-display text-cream mb-3 group-hover:text-copper transition-colors duration-300">
+                          {service.title}
+                        </h3>
+                        <p className="text-cream/50 leading-relaxed text-sm mb-4">
+                          {service.description}
+                        </p>
+                        <span className="inline-flex items-center gap-2 font-mono text-xs text-copper/70 group-hover:text-copper transition-colors">
+                          <span className="w-8 h-[1px] bg-copper/50 group-hover:w-12 transition-all" />
+                          {service.stats}
+                          <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
+                  </motion.div>
+                </Link>
               );
             })}
           </div>

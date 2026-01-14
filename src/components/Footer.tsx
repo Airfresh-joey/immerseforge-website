@@ -1,4 +1,5 @@
 import { Instagram, Twitter } from 'lucide-react';
+import { Link } from 'wouter';
 
 interface FooterProps {
   siteName: string;
@@ -18,6 +19,22 @@ interface FooterProps {
     legal: string[];
   };
 }
+
+// Service to route mapping
+const serviceRoutes: Record<string, string> = {
+  'Brand Activations': '/services/brand-activations',
+  'Experiential Production': '/services/experiential-campaigns',
+  'VIP Experiences': '/services/vip-events',
+  'Brand Ambassadors': '/services/brand-ambassador-programs',
+};
+
+// Company link mapping
+const companyRoutes: Record<string, string> = {
+  'About': '/about',
+  'Our Work': '/work',
+  'Talent': '/talent',
+  'Contact': '/contact',
+};
 
 export const Footer = ({ siteName, tagline, contact, social, footer }: FooterProps) => {
   return (
@@ -58,13 +75,16 @@ export const Footer = ({ siteName, tagline, contact, social, footer }: FooterPro
               Services
             </h4>
             <ul className="space-y-2">
-              {footer.services.map((service) => (
-                <li key={service}>
-                  <a href="#" className="text-cream-muted hover:text-cream transition-colors text-sm">
-                    {service}
-                  </a>
-                </li>
-              ))}
+              {footer.services.map((service) => {
+                const route = serviceRoutes[service] || '/services/brand-activations';
+                return (
+                  <li key={service}>
+                    <Link href={route} className="text-cream-muted hover:text-cream transition-colors text-sm">
+                      {service}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
@@ -74,13 +94,16 @@ export const Footer = ({ siteName, tagline, contact, social, footer }: FooterPro
               Company
             </h4>
             <ul className="space-y-2">
-              {footer.company.map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-cream-muted hover:text-cream transition-colors text-sm">
-                    {item}
-                  </a>
-                </li>
-              ))}
+              {footer.company.map((item) => {
+                const route = companyRoutes[item] || '/';
+                return (
+                  <li key={item}>
+                    <Link href={route} className="text-cream-muted hover:text-cream transition-colors text-sm">
+                      {item}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 

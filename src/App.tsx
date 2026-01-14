@@ -6,6 +6,16 @@ import { Work } from './pages/Work';
 import { About } from './pages/About';
 import { Talent } from './pages/Talent';
 import { Contact } from './pages/Contact';
+import {
+  BrandActivations,
+  TradeShowProduction,
+  PopUpExperiences,
+  VIPEvents,
+  ProductLaunches,
+  FestivalActivations,
+  ExperientialCampaigns,
+  BrandAmbassadorPrograms,
+} from './pages/services';
 
 function App() {
   const { content, loading, error } = useWebsiteContent();
@@ -48,6 +58,17 @@ function App() {
         <Route path="/about" component={() => <About content={content} />} />
         <Route path="/talent" component={() => <Talent content={content} />} />
         <Route path="/contact" component={() => <Contact content={content} />} />
+
+        {/* Service Pages */}
+        <Route path="/services/brand-activations" component={() => <BrandActivations />} />
+        <Route path="/services/trade-show-production" component={() => <TradeShowProduction />} />
+        <Route path="/services/pop-up-experiences" component={() => <PopUpExperiences />} />
+        <Route path="/services/vip-events" component={() => <VIPEvents />} />
+        <Route path="/services/product-launches" component={() => <ProductLaunches />} />
+        <Route path="/services/festival-activations" component={() => <FestivalActivations />} />
+        <Route path="/services/experiential-campaigns" component={() => <ExperientialCampaigns />} />
+        <Route path="/services/brand-ambassador-programs" component={() => <BrandAmbassadorPrograms />} />
+
         <Route>
           <div className="min-h-screen bg-black flex items-center justify-center">
             <div className="text-center">
