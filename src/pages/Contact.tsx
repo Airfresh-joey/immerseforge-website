@@ -35,16 +35,26 @@ export const Contact = ({ content }: ContactProps) => {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          budget: formData.budget,
+          message: formData.message,
+        }),
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (response.ok && data.ok) {
         setFormState('success');
         setFormData({ name: '', email: '', company: '', budget: '', message: '' });
       } else {
+        console.error('Form submission failed:', data);
         setFormState('error');
       }
-    } catch {
+    } catch (err) {
+      console.error('Form submission error:', err);
       setFormState('error');
     }
   };
