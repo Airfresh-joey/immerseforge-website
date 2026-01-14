@@ -1,4 +1,4 @@
-import { Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Instagram, Twitter } from 'lucide-react';
 
 interface FooterProps {
   siteName: string;
@@ -39,15 +39,6 @@ export const Footer = ({ siteName, tagline, contact, social, footer }: FooterPro
                 aria-label="Instagram"
               >
                 <Instagram size={20} />
-              </a>
-              <a
-                href={social.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-cream hover:text-copper transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={20} />
               </a>
               <a
                 href={social.twitter}

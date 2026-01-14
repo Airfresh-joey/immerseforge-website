@@ -4,6 +4,8 @@ import { Layout } from './components/Layout';
 import { Home } from './pages/Home';
 import { Work } from './pages/Work';
 import { About } from './pages/About';
+import { Talent } from './pages/Talent';
+import { Contact } from './pages/Contact';
 
 function App() {
   const { content, loading, error } = useWebsiteContent();
@@ -44,6 +46,8 @@ function App() {
         <Route path="/" component={() => <Home content={content} />} />
         <Route path="/work" component={() => <Work content={content} />} />
         <Route path="/about" component={() => <About content={content} />} />
+        <Route path="/talent" component={() => <Talent content={content} />} />
+        <Route path="/contact" component={() => <Contact content={content} />} />
         <Route>
           <div className="min-h-screen bg-black flex items-center justify-center">
             <div className="text-center">

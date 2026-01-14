@@ -36,7 +36,7 @@
       },
       "clients": {
         "label": "TRUSTED BY INDUSTRY LEADERS",
-        "logos": ["Netflix", "Apple", "Google", "Microsoft", "MrBeast", "Formula 1", "Williams Racing", "TED"]
+        "logos": ["Williams Racing", "Duracell", "+44", "Atlanta Braves", "Cortland", "Formula 1", "Golf Online", "Baja Brewing"]
       },
       "services": [
         {
@@ -84,30 +84,30 @@
         "projects": [
           {
             "id": 1,
-            "title": "NETFLIX PREMIERE EXPERIENCE",
-            "client": "Netflix",
-            "category": "Immersive Pop-Up",
-            "description": "Multi-sensory pop-up activation that transported fans into the world of a hit series. Full immersive environment with trained character actors and interactive elements.",
-            "result": "47,000+ visitors. 2.3M social impressions. 94% satisfaction rate.",
-            "image": "images/case-studies/netflix.jpg"
+            "title": "WILLIAMS RACING × DURACELL",
+            "client": "Williams Racing",
+            "category": "Retail Activation",
+            "description": "Multi-location retail activation for the Las Vegas Grand Prix featuring F1 racing simulators, brand ambassadors, and meet-and-greet sweepstakes with Williams Racing drivers.",
+            "result": "50+ retail locations. 15,000+ simulator experiences. 89% engagement rate.",
+            "image": "images/case-studies/williams-racing-3.jpg"
           },
           {
             "id": 2,
-            "title": "APPLE VIP RETREAT",
-            "client": "Apple",
-            "category": "Exclusive Experience",
-            "description": "Ultra-exclusive 3-day experiential retreat for top developers and creative professionals. Luxury outdoor experience with integrated product demonstrations.",
-            "result": "150 VIP guests. 100% satisfaction. $12M earned media value.",
-            "image": "images/case-studies/apple-vip.jpg"
+            "title": "+44 × GOLF ONLINE",
+            "client": "+44 (Lewis Hamilton)",
+            "category": "Experiential Pop-Up",
+            "description": "Immersive photo experience activation for Lewis Hamilton's +44 brand collaboration with Golf Online. Custom-built garage environment with luxury vehicle display and branded photo moments.",
+            "result": "10,000+ photo shares. 2.1M social reach. 97% positive sentiment.",
+            "image": "images/case-studies/formula-1-2.jpg"
           },
           {
             "id": 3,
-            "title": "MICROSOFT NRF ACTIVATION",
-            "client": "Microsoft",
-            "category": "Trade Show Domination",
-            "description": "Immersive HoloLens demonstration activation at NRF Big Show. Specialized tech ambassadors and interactive demo stations driving unprecedented engagement.",
-            "result": "2,847 qualified leads. 89% engagement. 156 C-suite demos.",
-            "image": "images/case-studies/microsoft.jpg"
+            "title": "ATLANTA BRAVES × CORTLAND",
+            "client": "Cortland",
+            "category": "Stadium Activation",
+            "description": "Fan engagement activation at Truist Park featuring exclusive co-branded merchandise giveaways and interactive brand experiences throughout the stadium concourse.",
+            "result": "25,000+ fans engaged. 5,000 shirts distributed. 340% social lift.",
+            "image": "images/case-studies/microsoft-2.jpg"
           }
         ]
       },
@@ -156,27 +156,30 @@
       "projects": [
         {
           "id": 1,
-          "title": "Netflix Premiere Experience",
-          "client": "Netflix",
-          "category": "Immersive Pop-Up",
-          "description": "Multi-sensory pop-up activation for a major series premiere.",
-          "results": ["47,000+ visitors", "2.3M impressions", "94% satisfaction"]
+          "title": "Williams Racing × Duracell",
+          "client": "Williams Racing",
+          "category": "Retail Activation",
+          "description": "Multi-location retail activation for the Las Vegas Grand Prix with F1 simulators and brand ambassadors.",
+          "results": ["50+ locations", "15K+ experiences", "89% engagement"],
+          "image": "images/case-studies/williams-racing-3.jpg"
         },
         {
           "id": 2,
-          "title": "Apple VIP Retreat",
-          "client": "Apple",
-          "category": "Exclusive Experience",
-          "description": "3-day luxury retreat for top developers and creative professionals.",
-          "results": ["150 VIP guests", "$12M earned media", "100% satisfaction"]
+          "title": "+44 × Golf Online",
+          "client": "+44 (Lewis Hamilton)",
+          "category": "Experiential Pop-Up",
+          "description": "Immersive photo experience for Lewis Hamilton's +44 brand with custom garage environment.",
+          "results": ["10K+ shares", "2.1M reach", "97% sentiment"],
+          "image": "images/case-studies/formula-1-2.jpg"
         },
         {
           "id": 3,
-          "title": "Microsoft NRF Activation",
-          "client": "Microsoft",
-          "category": "Trade Show",
-          "description": "Immersive HoloLens demonstration activation at National Retail Federation.",
-          "results": ["2,847 leads", "89% engagement", "847% ROI"]
+          "title": "Atlanta Braves × Cortland",
+          "client": "Cortland",
+          "category": "Stadium Activation",
+          "description": "Fan engagement activation at Truist Park with co-branded merchandise giveaways.",
+          "results": ["25K+ engaged", "5K shirts", "340% social lift"],
+          "image": "images/case-studies/microsoft-2.jpg"
         }
       ]
     },
@@ -211,10 +214,10 @@
   "assets": {
     "images": {
       "hero_background": "stock_images/dark_industrial_ware_41aa92fe.jpg",
-      "case_study_1": "images/case-studies/netflix.jpg",
-      "case_study_2": "images/case-studies/apple-vip.jpg",
-      "case_study_3": "images/case-studies/microsoft.jpg",
-      "studio_process": "images/case-studies/formula-1.jpg"
+      "case_study_1": "images/case-studies/williams-racing-3.jpg",
+      "case_study_2": "images/case-studies/formula-1-2.jpg",
+      "case_study_3": "images/case-studies/microsoft-2.jpg",
+      "studio_process": "images/case-studies/williams-racing-2.jpg"
     },
     "videos": {
       "hero_video": ""
@@ -242,12 +245,12 @@
   "navigation": [
     { "label": "Work", "href": "/work" },
     { "label": "About", "href": "/about" },
-    { "label": "Services", "href": "/#services" },
-    { "label": "Contact", "href": "/#contact" }
+    { "label": "Talent", "href": "/talent" },
+    { "label": "Contact", "href": "/contact" }
   ],
   "footer": {
     "services": ["Brand Activations", "Experiential Production", "VIP Experiences", "Brand Ambassadors"],
-    "company": ["About", "Our Work", "Careers", "Contact"],
+    "company": ["About", "Our Work", "Talent", "Contact"],
     "legal": ["Privacy Policy", "Terms of Service"]
   }
 }
