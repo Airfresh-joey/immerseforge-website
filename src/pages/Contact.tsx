@@ -29,7 +29,7 @@ export const Contact = ({ content }: ContactProps) => {
     setFormState('submitting');
 
     try {
-      const response = await fetch('https://formspree.io/f/2914327245092814411', {
+      const response = await fetch('https://formspree.io/f/mlggdrdr', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
