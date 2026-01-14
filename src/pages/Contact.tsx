@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Mail, MapPin, ArrowRight, CheckCircle } from 'lucide-react';
+import { Send, Mail, MapPin, Phone, ArrowRight, CheckCircle } from 'lucide-react';
 import type { WebsiteContent } from '../hooks/useWebsiteContent';
 
 interface ContactProps {
@@ -129,6 +129,21 @@ export const Contact = ({ content }: ContactProps) => {
                       className="text-cream hover:text-copper transition-colors"
                     >
                       {content.site.contact.email}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-sm bg-copper/10 flex items-center justify-center flex-shrink-0">
+                    <Phone className="text-copper" size={20} />
+                  </div>
+                  <div>
+                    <h3 className="font-mono text-sm text-copper tracking-wider mb-1">PHONE</h3>
+                    <a
+                      href={`tel:${content.site.contact.phone?.replace(/[^0-9]/g, '')}`}
+                      className="text-cream hover:text-copper transition-colors"
+                    >
+                      {content.site.contact.phone}
                     </a>
                   </div>
                 </div>
