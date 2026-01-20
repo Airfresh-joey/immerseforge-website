@@ -1,6 +1,6 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Upload, X, Check, Loader2, AlertCircle, Camera, FileText } from 'lucide-react';
+import { Check, Loader2, AlertCircle } from 'lucide-react';
 
 interface FormData {
   fullName: string;
@@ -12,8 +12,8 @@ interface FormData {
   experienceYears: string;
   previousBrands: string;
   skills: string[];
-  certifications: string;
   instagram: string;
+  portfolioLink: string;
   whyJoin: string;
 }
 
@@ -27,8 +27,8 @@ const initialFormData: FormData = {
   experienceYears: '',
   previousBrands: '',
   skills: [],
-  certifications: '',
   instagram: '',
+  portfolioLink: '',
   whyJoin: ''
 };
 
@@ -60,18 +60,15 @@ const skillOptions = [
   'Sales'
 ];
 
+// Formspree form ID for talent applications
+// Create a new form at formspree.io and replace this ID
+const FORMSPREE_FORM_ID = 'mlggdrdr';
+
 export function TalentApplicationForm() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const [headshot, setHeadshot] = useState<File | null>(null);
-  const [headshotPreview, setHeadshotPreview] = useState<string | null>(null);
-  const [resume, setResume] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
-  const [dragActive, setDragActive] = useState(false);
-
-  const headshotInputRef = useRef<HTMLInputElement>(null);
-  const resumeInputRef = useRef<HTMLInputElement>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -85,72 +82,6 @@ export function TalentApplicationForm() {
         ? prev[field].filter(v => v !== value)
         : [...prev[field], value]
     }));
-  };
-
-  const handleHeadshotChange = useCallback((file: File | null) => {
-    if (file) {
-      if (file.size > 5 * 1024 * 1024) {
-        setErrorMessage('Headshot must be under 5MB');
-        return;
-      }
-      if (!file.type.startsWith('image/')) {
-        setErrorMessage('Please upload an image file');
-        return;
-      }
-      setHeadshot(file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setHeadshotPreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-      setErrorMessage('');
-    }
-  }, []);
-
-  const handleResumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      if (file.size > 10 * 1024 * 1024) {
-        setErrorMessage('Resume must be under 10MB');
-        return;
-      }
-      setResume(file);
-      setErrorMessage('');
-    }
-  };
-
-  const handleDrag = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.type === 'dragenter' || e.type === 'dragover') {
-      setDragActive(true);
-    } else if (e.type === 'dragleave') {
-      setDragActive(false);
-    }
-  }, []);
-
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      handleHeadshotChange(e.dataTransfer.files[0]);
-    }
-  }, [handleHeadshotChange]);
-
-  const removeHeadshot = () => {
-    setHeadshot(null);
-    setHeadshotPreview(null);
-    if (headshotInputRef.current) {
-      headshotInputRef.current.value = '';
-    }
-  };
-
-  const removeResume = () => {
-    setResume(null);
-    if (resumeInputRef.current) {
-      resumeInputRef.current.value = '';
-    }
   };
 
   const validateForm = (): boolean => {
@@ -174,10 +105,6 @@ export function TalentApplicationForm() {
       setErrorMessage('Please enter your city/market');
       return false;
     }
-    if (!headshot) {
-      setErrorMessage('Please upload a headshot');
-      return false;
-    }
     if (!formData.whyJoin.trim()) {
       setErrorMessage('Please tell us why you want to join ImmerseForge');
       return false;
@@ -196,45 +123,43 @@ export function TalentApplicationForm() {
     setIsSubmitting(true);
 
     try {
-      const submitData = new FormData();
-
-      // Add form fields
-      Object.entries(formData).forEach(([key, value]) => {
-        if (Array.isArray(value)) {
-          submitData.append(key, JSON.stringify(value));
-        } else {
-          submitData.append(key, value);
-        }
-      });
-
-      // Add files
-      if (headshot) {
-        submitData.append('headshot', headshot);
-      }
-      if (resume) {
-        submitData.append('resume', resume);
-      }
-
-      const response = await fetch('/api/submit-application', {
+      const response = await fetch(`https://formspree.io/f/${FORMSPREE_FORM_ID}`, {
         method: 'POST',
-        body: submitData
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          position: formData.position,
+          city: formData.city,
+          availability: formData.availability.join(', '),
+          experienceYears: formData.experienceYears,
+          previousBrands: formData.previousBrands,
+          skills: formData.skills.join(', '),
+          instagram: formData.instagram,
+          portfolioLink: formData.portfolioLink,
+          whyJoin: formData.whyJoin,
+          _subject: `New BA Application: ${formData.fullName} - ${formData.position}`,
+        }),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || 'Failed to submit application');
+      const data = await response.json();
+
+      if (response.ok && data.ok) {
+        setSubmitStatus('success');
+        setFormData(initialFormData);
+      } else {
+        console.error('Form submission failed:', data);
+        setSubmitStatus('error');
+        setErrorMessage('Failed to submit application. Please try again.');
       }
-
-      setSubmitStatus('success');
-      setFormData(initialFormData);
-      setHeadshot(null);
-      setHeadshotPreview(null);
-      setResume(null);
-
     } catch (error) {
       console.error('Submission error:', error);
       setSubmitStatus('error');
-      setErrorMessage(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
+      setErrorMessage('Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -352,57 +277,6 @@ export function TalentApplicationForm() {
               />
             </div>
           </div>
-
-          {/* Headshot Upload */}
-          <div className="mt-6">
-            <label className="block font-mono text-xs uppercase tracking-wider text-cream/50 mb-2">
-              Headshot <span className="text-copper">*</span>
-            </label>
-
-            {headshotPreview ? (
-              <div className="relative inline-block">
-                <img
-                  src={headshotPreview}
-                  alt="Headshot preview"
-                  className="w-32 h-32 object-cover rounded-lg border border-white/10"
-                />
-                <button
-                  type="button"
-                  onClick={removeHeadshot}
-                  className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-400 transition-colors"
-                >
-                  <X className="w-4 h-4 text-white" />
-                </button>
-              </div>
-            ) : (
-              <div
-                onDragEnter={handleDrag}
-                onDragLeave={handleDrag}
-                onDragOver={handleDrag}
-                onDrop={handleDrop}
-                onClick={() => headshotInputRef.current?.click()}
-                className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all ${
-                  dragActive
-                    ? 'border-copper bg-copper/10'
-                    : 'border-white/10 hover:border-copper/30 hover:bg-white/5'
-                }`}
-              >
-                <Camera className="w-10 h-10 text-cream/30 mx-auto mb-3" />
-                <p className="text-cream/60 text-sm mb-1">
-                  Drag & drop your headshot here, or click to browse
-                </p>
-                <p className="text-cream/30 text-xs">PNG, JPG up to 5MB</p>
-              </div>
-            )}
-
-            <input
-              ref={headshotInputRef}
-              type="file"
-              accept="image/*"
-              onChange={(e) => handleHeadshotChange(e.target.files?.[0] || null)}
-              className="hidden"
-            />
-          </div>
         </div>
 
         {/* Position & Experience */}
@@ -515,21 +389,6 @@ export function TalentApplicationForm() {
               placeholder="Nike, Apple, Red Bull, etc."
             />
           </div>
-
-          {/* Certifications */}
-          <div className="mt-6">
-            <label className="block font-mono text-xs uppercase tracking-wider text-cream/50 mb-2">
-              Certifications
-            </label>
-            <input
-              type="text"
-              name="certifications"
-              value={formData.certifications}
-              onChange={handleInputChange}
-              className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-3 text-cream placeholder-cream/30 focus:border-copper/50 focus:outline-none transition-colors"
-              placeholder="TIPS, Food Handler, CPR, etc."
-            />
-          </div>
         </div>
 
         {/* Additional Info */}
@@ -556,37 +415,17 @@ export function TalentApplicationForm() {
 
             <div>
               <label className="block font-mono text-xs uppercase tracking-wider text-cream/50 mb-2">
-                Resume (Optional)
+                Portfolio / Headshot Link
               </label>
-              {resume ? (
-                <div className="flex items-center gap-3 p-3 bg-black/30 border border-white/10 rounded-lg">
-                  <FileText className="w-5 h-5 text-copper" />
-                  <span className="text-cream text-sm flex-1 truncate">{resume.name}</span>
-                  <button
-                    type="button"
-                    onClick={removeResume}
-                    className="text-cream/50 hover:text-red-400 transition-colors"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
-                </div>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => resumeInputRef.current?.click()}
-                  className="w-full p-3 bg-black/30 border border-white/10 rounded-lg text-cream/60 hover:border-copper/30 transition-colors flex items-center justify-center gap-2"
-                >
-                  <Upload className="w-4 h-4" />
-                  <span className="text-sm">Upload Resume (PDF)</span>
-                </button>
-              )}
               <input
-                ref={resumeInputRef}
-                type="file"
-                accept=".pdf,.doc,.docx"
-                onChange={handleResumeChange}
-                className="hidden"
+                type="url"
+                name="portfolioLink"
+                value={formData.portfolioLink}
+                onChange={handleInputChange}
+                className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-3 text-cream placeholder-cream/30 focus:border-copper/50 focus:outline-none transition-colors"
+                placeholder="https://drive.google.com/..."
               />
+              <p className="text-cream/30 text-xs mt-1">Google Drive, Dropbox, or portfolio link</p>
             </div>
           </div>
 
