@@ -48,7 +48,7 @@ export const TradeShowProduction = () => {
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
-            src="/images/case-studies/microsoft.jpg"
+            src="/images/case-studies/trade-show.jpg"
             alt="Trade Show Production"
             className="w-full h-full object-cover"
           />
