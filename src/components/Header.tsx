@@ -36,6 +36,8 @@ export const Header = ({ navigation }: HeaderProps) => {
                 src="/images/logo.png"
                 alt="ImmerseForge"
                 className="h-10 md:h-12 w-auto"
+                width="200"
+                height="48"
               />
             </a>
           </Link>

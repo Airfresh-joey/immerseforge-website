@@ -230,6 +230,9 @@ export const Home = ({ content }: HomeProps) => {
                 src="/images/hero-logo.png"
                 alt="ImmerseForge - Experiential Studio"
                 className="w-full max-w-3xl lg:max-w-4xl mx-auto"
+                width="896"
+                height="200"
+                fetchPriority="high"
               />
             </motion.div>
           </div>
