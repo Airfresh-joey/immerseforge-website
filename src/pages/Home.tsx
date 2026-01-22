@@ -216,34 +216,22 @@ export const Home = ({ content }: HomeProps) => {
               <div className="w-[80%] h-32 bg-copper/10 blur-[100px] rounded-full" />
             </div>
 
-            <div className="overflow-hidden">
-              <motion.h1
-                className="text-[20vw] md:text-[16vw] lg:text-[13vw] font-display tracking-[0.02em] text-cream leading-[0.85] relative"
-                initial={{ y: 200, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{
-                  duration: 1.4,
-                  delay: 0.4,
-                  ease: [0.25, 0.1, 0, 1]
-                }}
-              >
-                IMMERSE
-              </motion.h1>
-            </div>
-            <div className="overflow-hidden">
-              <motion.h1
-                className="text-[20vw] md:text-[16vw] lg:text-[13vw] font-display tracking-[0.02em] leading-[0.85] relative"
-                initial={{ y: 200, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{
-                  duration: 1.4,
-                  delay: 0.55,
-                  ease: [0.25, 0.1, 0, 1]
-                }}
-              >
-                <GradientText>FORGE</GradientText>
-              </motion.h1>
-            </div>
+            <motion.div
+              className="overflow-hidden"
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{
+                duration: 1.4,
+                delay: 0.4,
+                ease: [0.25, 0.1, 0, 1]
+              }}
+            >
+              <img
+                src="/images/hero-logo.png"
+                alt="ImmerseForge - Experiential Studio"
+                className="w-full max-w-3xl lg:max-w-4xl mx-auto"
+              />
+            </motion.div>
           </div>
 
           {/* Tagline */}
