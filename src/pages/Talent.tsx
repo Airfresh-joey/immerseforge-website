@@ -2,6 +2,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Users, Calendar, DollarSign, Briefcase, MapPin, Star, Sparkles, Zap, ArrowRight, CheckCircle } from 'lucide-react';
 import { TalentApplicationForm } from '../components/TalentApplicationForm';
+import { Link } from 'wouter';
 import type { WebsiteContent } from '../hooks/useWebsiteContent';
 
 interface TalentProps {
@@ -251,15 +252,16 @@ export function Talent({ content }: TalentProps) {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <motion.button
-                onClick={scrollToForm}
-                className="inline-flex items-center justify-center gap-3 bg-copper hover:bg-copper-light text-black font-mono text-sm uppercase tracking-wider px-8 py-4 transition-all cursor-pointer"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Apply for This Position
-                <ArrowRight size={18} />
-              </motion.button>
+              <Link href="/talent/nyc-street-activation">
+                <motion.a
+                  className="inline-flex items-center justify-center gap-3 bg-copper hover:bg-copper-light text-black font-mono text-sm uppercase tracking-wider px-8 py-4 transition-all cursor-pointer"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Apply for This Position
+                  <ArrowRight size={18} />
+                </motion.a>
+              </Link>
               <a
                 href="mailto:crew@immerseforge.com?subject=Question About NYC Street Activation"
                 className="inline-flex items-center justify-center gap-3 border border-copper text-copper hover:bg-copper/10 font-mono text-sm uppercase tracking-wider px-8 py-4 transition-all"
