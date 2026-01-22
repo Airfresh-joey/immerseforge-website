@@ -7,6 +7,7 @@ export function NYCStreetActivation() {
   const formRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     document.title = 'NYC Street Activation - Brand Ambassador | ImmerseForge';
   }, []);
 
@@ -17,11 +18,19 @@ export function NYCStreetActivation() {
   return (
     <div className="min-h-screen bg-black">
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-black to-black" />
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img
+            src="/images/case-studies/formula-1.jpg"
+            alt="Brand Ambassador Street Team"
+            className="w-full h-full object-cover object-top"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black" />
+        </div>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-copper/15 via-transparent to-transparent" />
 
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center py-24">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center pt-32 pb-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
