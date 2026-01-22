@@ -4,11 +4,11 @@ import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface HeaderProps {
-  siteName: string;
+  siteName?: string;
   navigation: Array<{ label: string; href: string }>;
 }
 
-export const Header = ({ siteName, navigation }: HeaderProps) => {
+export const Header = ({ navigation }: HeaderProps) => {
   const [location] = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -31,8 +31,12 @@ export const Header = ({ siteName, navigation }: HeaderProps) => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <Link href="/">
-            <a className="text-2xl font-display tracking-wider text-cream hover:text-copper transition-colors">
-              {siteName}
+            <a className="block">
+              <img
+                src="/images/logo.png"
+                alt="ImmerseForge"
+                className="h-10 md:h-12 w-auto"
+              />
             </a>
           </Link>
 
