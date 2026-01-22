@@ -11,6 +11,7 @@ const GradientText = ({ children }: { children: React.ReactNode }) => (
 
 export const BrandActivations = () => {
   useEffect(() => {
+    window.scrollTo(0, 0);
     document.title = 'Brand Activations | Experiential Marketing Agency | ImmerseForge';
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
@@ -50,7 +51,7 @@ export const BrandActivations = () => {
           <img
             src="/images/case-studies/mrbeast.jpg"
             alt="Brand Activation"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-top"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black" />
         </div>

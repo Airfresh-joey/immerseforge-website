@@ -11,6 +11,7 @@ const GradientText = ({ children }: { children: React.ReactNode }) => (
 
 export const VIPEvents = () => {
   useEffect(() => {
+    window.scrollTo(0, 0);
     document.title = 'VIP Events & Exclusive Experiences | ImmerseForge';
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
@@ -50,7 +51,7 @@ export const VIPEvents = () => {
           <img
             src="/images/case-studies/apple-vip.jpg"
             alt="VIP Event"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-top"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black" />
         </div>
