@@ -2,7 +2,6 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Users, Calendar, DollarSign, Briefcase, MapPin, Star, Sparkles, Zap, ArrowRight, CheckCircle } from 'lucide-react';
 import { TalentApplicationForm } from '../components/TalentApplicationForm';
-import { Link } from 'wouter';
 import type { WebsiteContent } from '../hooks/useWebsiteContent';
 
 interface TalentProps {
