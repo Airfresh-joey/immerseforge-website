@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, Loader2, AlertCircle, ChevronRight, ChevronLeft, User, FileText, Briefcase, Camera, MapPin } from 'lucide-react';
+import { Check, Loader2, AlertCircle, ChevronRight, ChevronLeft, User, FileText, Briefcase, Camera, MapPin, Upload, X } from 'lucide-react';
 
 // Formspree form ID for BA applications
 const FORMSPREE_FORM_ID = 'mpqqeyrn';
@@ -78,7 +78,10 @@ interface FormData {
   managementExperience: string;
   otherExperience: string;
   previousBrands: string;
-  photoLinks: string;
+  headshot: File | null;
+  fullBodyPhoto: File | null;
+  additionalPhotos: File[];
+  resume: File | null;
   instagram: string;
   workAreas: string[];
   willingToTravel: string;
@@ -110,7 +113,10 @@ const initialFormData: FormData = {
   managementExperience: '',
   otherExperience: '',
   previousBrands: '',
-  photoLinks: '',
+  headshot: null,
+  fullBodyPhoto: null,
+  additionalPhotos: [],
+  resume: null,
   instagram: '',
   workAreas: [],
   willingToTravel: '',
@@ -145,6 +151,23 @@ export function TalentApplicationForm() {
       [field]: prev[field].includes(value)
         ? prev[field].filter(v => v !== value)
         : [...prev[field], value]
+    }));
+  };
+
+  const handleFileChange = (field: 'headshot' | 'fullBodyPhoto' | 'resume', file: File | null) => {
+    setFormData(prev => ({ ...prev, [field]: file }));
+  };
+
+  const handleMultiFileChange = (files: FileList | null) => {
+    if (files) {
+      setFormData(prev => ({ ...prev, additionalPhotos: [...prev.additionalPhotos, ...Array.from(files)] }));
+    }
+  };
+
+  const removeAdditionalPhoto = (index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      additionalPhotos: prev.additionalPhotos.filter((_, i) => i !== index)
     }));
   };
 
@@ -185,18 +208,60 @@ export function TalentApplicationForm() {
     setErrorMessage('');
 
     try {
+      // Use FormData for file uploads
+      const submitData = new window.FormData();
+
+      // Add all text fields
+      submitData.append('firstName', formData.firstName);
+      submitData.append('lastName', formData.lastName);
+      submitData.append('email', formData.email);
+      submitData.append('phone', formData.phone);
+      submitData.append('dateOfBirth', formData.dateOfBirth);
+      submitData.append('gender', formData.gender);
+      submitData.append('address', formData.address);
+      submitData.append('city', formData.city);
+      submitData.append('state', formData.state);
+      submitData.append('zipcode', formData.zipcode);
+      submitData.append('height', formData.height);
+      submitData.append('tshirtSize', formData.tshirtSize);
+      submitData.append('pantsSize', formData.pantsSize);
+      submitData.append('shoeSize', formData.shoeSize);
+      submitData.append('tattoos', formData.tattoos);
+      submitData.append('howDidYouHear', formData.howDidYouHear);
+      submitData.append('referredBy', formData.referredBy);
+      submitData.append('yearsExperience', formData.yearsExperience);
+      submitData.append('personality', formData.personality);
+      submitData.append('vehicle', formData.vehicle);
+      submitData.append('skills', formData.skills.join(', '));
+      submitData.append('promoExperience', formData.promoExperience);
+      submitData.append('managementExperience', formData.managementExperience);
+      submitData.append('otherExperience', formData.otherExperience);
+      submitData.append('previousBrands', formData.previousBrands);
+      submitData.append('instagram', formData.instagram);
+      submitData.append('workAreas', formData.workAreas.join(', '));
+      submitData.append('willingToTravel', formData.willingToTravel);
+      submitData.append('_subject', `New BA Application: ${formData.firstName} ${formData.lastName}`);
+
+      // Add files
+      if (formData.headshot) {
+        submitData.append('headshot', formData.headshot);
+      }
+      if (formData.fullBodyPhoto) {
+        submitData.append('fullBodyPhoto', formData.fullBodyPhoto);
+      }
+      if (formData.resume) {
+        submitData.append('resume', formData.resume);
+      }
+      formData.additionalPhotos.forEach((photo, index) => {
+        submitData.append(`additionalPhoto_${index + 1}`, photo);
+      });
+
       const response = await fetch(`https://formspree.io/f/${FORMSPREE_FORM_ID}`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        body: JSON.stringify({
-          ...formData,
-          skills: formData.skills.join(', '),
-          workAreas: formData.workAreas.join(', '),
-          _subject: `New BA Application: ${formData.firstName} ${formData.lastName}`,
-        }),
+        body: submitData,
       });
 
       const data = await response.json();
@@ -426,26 +491,145 @@ export function TalentApplicationForm() {
     </div>
   );
 
-  // Step 5: Photos
+  // Step 5: Photos & Resume
   const renderStep5 = () => (
     <div className="space-y-6">
-      <h3 className="text-2xl font-display text-cream mb-2">Photos & Social Media</h3>
-      <p className="text-cream/60 mb-6">Share your portfolio and social presence.</p>
+      <h3 className="text-2xl font-display text-cream mb-2">Photos & Resume</h3>
+      <p className="text-cream/60 mb-6">Upload your photos and resume for our team to review.</p>
 
+      {/* Headshot Upload */}
       <div>
-        <label className={labelClassName}>Photo Links <span className="text-copper">*</span></label>
-        <textarea
-          name="photoLinks"
-          value={formData.photoLinks}
-          onChange={handleInputChange}
-          placeholder={"Paste links to your photos (Google Drive, Dropbox, portfolio website)\n\nExample:\nhttps://drive.google.com/...\nhttps://instagram.com/yourhandle"}
-          rows={4}
-          className={inputClassName + " resize-none"}
-        />
-        <p className="text-cream/30 text-xs mt-2">Please include at least 2 professional headshots/full body photos</p>
+        <label className={labelClassName}>Headshot Photo <span className="text-copper">*</span></label>
+        <div className="relative">
+          {formData.headshot ? (
+            <div className="flex items-center gap-3 p-4 bg-copper/10 border border-copper/30 rounded-lg">
+              <Check className="w-5 h-5 text-copper" />
+              <span className="text-cream flex-1 truncate">{formData.headshot.name}</span>
+              <button
+                type="button"
+                onClick={() => handleFileChange('headshot', null)}
+                className="text-cream/50 hover:text-red-400 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          ) : (
+            <label className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-white/20 rounded-lg cursor-pointer hover:border-copper/50 transition-colors">
+              <Upload className="w-8 h-8 text-cream/40 mb-2" />
+              <span className="text-cream/60 text-sm">Click to upload headshot</span>
+              <span className="text-cream/30 text-xs mt-1">JPG, PNG up to 10MB</span>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => handleFileChange('headshot', e.target.files?.[0] || null)}
+                className="hidden"
+              />
+            </label>
+          )}
+        </div>
       </div>
 
+      {/* Full Body Photo Upload */}
       <div>
+        <label className={labelClassName}>Full Body Photo <span className="text-copper">*</span></label>
+        <div className="relative">
+          {formData.fullBodyPhoto ? (
+            <div className="flex items-center gap-3 p-4 bg-copper/10 border border-copper/30 rounded-lg">
+              <Check className="w-5 h-5 text-copper" />
+              <span className="text-cream flex-1 truncate">{formData.fullBodyPhoto.name}</span>
+              <button
+                type="button"
+                onClick={() => handleFileChange('fullBodyPhoto', null)}
+                className="text-cream/50 hover:text-red-400 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          ) : (
+            <label className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-white/20 rounded-lg cursor-pointer hover:border-copper/50 transition-colors">
+              <Upload className="w-8 h-8 text-cream/40 mb-2" />
+              <span className="text-cream/60 text-sm">Click to upload full body photo</span>
+              <span className="text-cream/30 text-xs mt-1">JPG, PNG up to 10MB</span>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => handleFileChange('fullBodyPhoto', e.target.files?.[0] || null)}
+                className="hidden"
+              />
+            </label>
+          )}
+        </div>
+      </div>
+
+      {/* Additional Photos */}
+      <div>
+        <label className={labelClassName}>Additional Photos (Optional)</label>
+        <div className="space-y-3">
+          {formData.additionalPhotos.length > 0 && (
+            <div className="space-y-2">
+              {formData.additionalPhotos.map((photo, index) => (
+                <div key={index} className="flex items-center gap-3 p-3 bg-charcoal/50 border border-white/10 rounded-lg">
+                  <Camera className="w-4 h-4 text-copper" />
+                  <span className="text-cream/80 text-sm flex-1 truncate">{photo.name}</span>
+                  <button
+                    type="button"
+                    onClick={() => removeAdditionalPhoto(index)}
+                    className="text-cream/50 hover:text-red-400 transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+          <label className="flex items-center justify-center gap-2 p-4 border border-dashed border-white/20 rounded-lg cursor-pointer hover:border-copper/50 transition-colors">
+            <Upload className="w-5 h-5 text-cream/40" />
+            <span className="text-cream/60 text-sm">Add more photos</span>
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={(e) => handleMultiFileChange(e.target.files)}
+              className="hidden"
+            />
+          </label>
+        </div>
+      </div>
+
+      {/* Resume Upload */}
+      <div className="pt-4 border-t border-white/10">
+        <label className={labelClassName}>Resume / CV</label>
+        <div className="relative">
+          {formData.resume ? (
+            <div className="flex items-center gap-3 p-4 bg-copper/10 border border-copper/30 rounded-lg">
+              <FileText className="w-5 h-5 text-copper" />
+              <span className="text-cream flex-1 truncate">{formData.resume.name}</span>
+              <button
+                type="button"
+                onClick={() => handleFileChange('resume', null)}
+                className="text-cream/50 hover:text-red-400 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          ) : (
+            <label className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-white/20 rounded-lg cursor-pointer hover:border-copper/50 transition-colors">
+              <FileText className="w-8 h-8 text-cream/40 mb-2" />
+              <span className="text-cream/60 text-sm">Click to upload resume</span>
+              <span className="text-cream/30 text-xs mt-1">PDF, DOC, DOCX up to 5MB</span>
+              <input
+                type="file"
+                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                onChange={(e) => handleFileChange('resume', e.target.files?.[0] || null)}
+                className="hidden"
+              />
+            </label>
+          )}
+        </div>
+      </div>
+
+      {/* Instagram */}
+      <div className="pt-4 border-t border-white/10">
         <label className={labelClassName}>Instagram Handle</label>
         <input type="text" name="instagram" value={formData.instagram} onChange={handleInputChange} placeholder="@yourhandle" className={inputClassName} />
       </div>
@@ -529,6 +713,20 @@ export function TalentApplicationForm() {
           <p className="text-cream/60 text-sm">{formData.city}, {formData.state}</p>
           <p className="text-cream/60 text-sm mt-2">{formData.skills.length} skills selected</p>
           <p className="text-cream/60 text-sm">{formData.workAreas.length} work areas selected</p>
+          <div className="mt-3 pt-3 border-t border-white/10">
+            <p className="text-cream/60 text-sm flex items-center gap-2">
+              <Camera className="w-4 h-4" />
+              {formData.headshot ? 'Headshot uploaded' : 'No headshot'}
+              {formData.fullBodyPhoto ? ' + Full body' : ''}
+              {formData.additionalPhotos.length > 0 ? ` + ${formData.additionalPhotos.length} more` : ''}
+            </p>
+            {formData.resume && (
+              <p className="text-cream/60 text-sm flex items-center gap-2 mt-1">
+                <FileText className="w-4 h-4" />
+                Resume uploaded
+              </p>
+            )}
+          </div>
         </div>
 
         <motion.button
