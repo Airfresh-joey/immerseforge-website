@@ -263,10 +263,10 @@ export function Talent({ content }: TalentProps) {
                 </motion.a>
               </Link>
               <a
-                href="mailto:crew@immerseforge.com?subject=NYC Street Activation Application"
+                href="mailto:crew@immerseforge.com?subject=Question About NYC Street Activation"
                 className="inline-flex items-center justify-center gap-3 border border-copper text-copper hover:bg-copper/10 font-mono text-sm uppercase tracking-wider px-8 py-4 transition-all"
               >
-                Email Application
+                Questions? Email Us
               </a>
             </div>
           </motion.div>

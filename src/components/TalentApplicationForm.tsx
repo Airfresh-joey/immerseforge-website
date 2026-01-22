@@ -53,6 +53,7 @@ const WORK_AREAS: Record<string, string[]> = {
 };
 
 interface FormData {
+  applicationType: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -88,6 +89,7 @@ interface FormData {
 }
 
 const initialFormData: FormData = {
+  applicationType: '',
   firstName: '',
   lastName: '',
   email: '',
@@ -175,6 +177,7 @@ export function TalentApplicationForm() {
     setErrorMessage('');
     switch (step) {
       case 1:
+        if (!formData.applicationType) { setErrorMessage('Please select what you are applying for'); return false; }
         if (!formData.firstName.trim()) { setErrorMessage('First name is required'); return false; }
         if (!formData.lastName.trim()) { setErrorMessage('Last name is required'); return false; }
         if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
@@ -212,6 +215,7 @@ export function TalentApplicationForm() {
       const submitData = new window.FormData();
 
       // Add all text fields
+      submitData.append('applicationType', formData.applicationType);
       submitData.append('firstName', formData.firstName);
       submitData.append('lastName', formData.lastName);
       submitData.append('email', formData.email);
@@ -286,6 +290,38 @@ export function TalentApplicationForm() {
     <div className="space-y-6">
       <h3 className="text-2xl font-display text-cream mb-6">Let's Get Started</h3>
       <p className="text-cream/60 mb-6">Enter your basic information to create your profile.</p>
+
+      {/* Application Type */}
+      <div className="mb-6 p-4 bg-copper/10 border border-copper/30 rounded-lg">
+        <label className={labelClassName}>What are you applying for? <span className="text-copper">*</span></label>
+        <div className="flex flex-col sm:flex-row gap-3 mt-3">
+          {[
+            { value: 'NYC Street Activation (Feb 14-15, 2025)', label: 'NYC Street Activation', sublabel: 'Feb 14-15, 2025' },
+            { value: 'Join Talent Database', label: 'Join Talent Database', sublabel: 'General Application' },
+          ].map(option => (
+            <label
+              key={option.value}
+              className={`flex-1 p-4 rounded-lg border-2 cursor-pointer transition-all ${
+                formData.applicationType === option.value
+                  ? 'bg-copper/20 border-copper text-cream'
+                  : 'border-white/10 text-cream/60 hover:border-copper/30'
+              }`}
+            >
+              <input
+                type="radio"
+                name="applicationType"
+                value={option.value}
+                checked={formData.applicationType === option.value}
+                onChange={handleInputChange}
+                className="hidden"
+              />
+              <div className="font-medium">{option.label}</div>
+              <div className="text-xs text-cream/50 mt-1">{option.sublabel}</div>
+            </label>
+          ))}
+        </div>
+      </div>
+
       <div className="grid md:grid-cols-2 gap-6">
         <div>
           <label className={labelClassName}>First Name <span className="text-copper">*</span></label>
@@ -708,6 +744,7 @@ export function TalentApplicationForm() {
         <p className="text-cream/60 mb-8">Review your information and submit your application.</p>
 
         <div className="bg-black/30 rounded-lg p-6 mb-8 text-left max-w-md mx-auto">
+          <p className="text-copper font-mono text-xs uppercase mb-2">{formData.applicationType}</p>
           <p className="text-cream font-medium">{formData.firstName} {formData.lastName}</p>
           <p className="text-cream/60 text-sm">{formData.email}</p>
           <p className="text-cream/60 text-sm">{formData.city}, {formData.state}</p>
