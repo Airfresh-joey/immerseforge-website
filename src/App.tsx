@@ -6,6 +6,7 @@ import { Work } from './pages/Work';
 import { About } from './pages/About';
 import { Talent } from './pages/Talent';
 import { Contact } from './pages/Contact';
+import { NYCStreetActivation } from './pages/talent/NYCStreetActivation';
 import {
   BrandActivations,
   TradeShowProduction,
@@ -57,6 +58,7 @@ function App() {
         <Route path="/work" component={() => <Work content={content} />} />
         <Route path="/about" component={() => <About content={content} />} />
         <Route path="/talent" component={() => <Talent content={content} />} />
+        <Route path="/talent/nyc-street-activation" component={() => <NYCStreetActivation />} />
         <Route path="/contact" component={() => <Contact content={content} />} />
 
         {/* Service Pages */}

@@ -1,7 +1,8 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Users, Calendar, DollarSign, Briefcase, MapPin, Star, Sparkles, Zap } from 'lucide-react';
+import { Users, Calendar, DollarSign, Briefcase, MapPin, Star, Sparkles, Zap, ArrowRight, CheckCircle } from 'lucide-react';
 import { TalentApplicationForm } from '../components/TalentApplicationForm';
+import { Link } from 'wouter';
 import type { WebsiteContent } from '../hooks/useWebsiteContent';
 
 interface TalentProps {
@@ -162,6 +163,113 @@ export function Talent({ content }: TalentProps) {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Featured Opportunity */}
+      <section className="py-24 bg-gradient-to-b from-copper/5 to-transparent">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <p className="font-mono text-sm uppercase tracking-[0.2em] text-copper mb-4">
+              Featured Opportunity
+            </p>
+            <h2 className="text-4xl md:text-6xl font-display text-cream">
+              Now Hiring
+            </h2>
+          </motion.div>
+
+          <motion.div
+            className="max-w-4xl mx-auto p-8 md:p-12 rounded-lg bg-gradient-to-br from-charcoal/80 to-charcoal/40 border border-copper/30"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="flex flex-wrap gap-3 mb-6">
+              <span className="px-3 py-1 bg-copper/20 border border-copper/40 rounded-full text-copper text-xs font-mono uppercase">NYC</span>
+              <span className="px-3 py-1 bg-copper/20 border border-copper/40 rounded-full text-copper text-xs font-mono uppercase">Feb 14-15</span>
+              <span className="px-3 py-1 bg-copper/20 border border-copper/40 rounded-full text-copper text-xs font-mono uppercase">$240 Flat Rate</span>
+            </div>
+
+            <h3 className="text-3xl md:text-4xl font-display text-cream mb-4">
+              Brand Ambassador – NYC Street Activation
+            </h3>
+            <p className="text-copper font-mono text-sm mb-6">Luxury Streetwear Brand Launch Activation</p>
+
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <div>
+                <p className="text-cream/50 text-sm font-mono uppercase mb-2">Dates</p>
+                <p className="text-cream">Saturday–Sunday, February 14–15</p>
+              </div>
+              <div>
+                <p className="text-cream/50 text-sm font-mono uppercase mb-2">Shift</p>
+                <p className="text-cream">4 hours per day | Start: 11:00 AM–12:00 PM</p>
+              </div>
+              <div>
+                <p className="text-cream/50 text-sm font-mono uppercase mb-2">Location</p>
+                <p className="text-cream">High-traffic Manhattan, Brooklyn, Queens</p>
+              </div>
+              <div>
+                <p className="text-cream/50 text-sm font-mono uppercase mb-2">Compensation</p>
+                <p className="text-cream">$240 flat rate (both days) | Paid within 7 days</p>
+              </div>
+            </div>
+
+            <div className="mb-8">
+              <h4 className="text-xl font-display text-cream mb-4">What You'll Do</h4>
+              <p className="text-cream/70 leading-relaxed">
+                Represent a premium clothing brand in a high-energy NYC street campaign. You'll distribute branded tote bags, engage pedestrians with authentic conversations, and drive QR code sign-ups to the brand's exclusive online platform. This is hands-on, culture-forward marketing—not flyering.
+              </p>
+            </div>
+
+            <div className="mb-8">
+              <h4 className="text-xl font-display text-cream mb-4">Who We're Looking For</h4>
+              <div className="grid md:grid-cols-2 gap-3">
+                {[
+                  'Experienced: Previous street team, brand ambassador, or experiential marketing work',
+                  'Confident Communicator: Comfortable approaching strangers in busy NYC environments',
+                  'Brand-Aligned: Polished, personable, and able to deliver talking points naturally',
+                  'Reliable: Punctual, detail-oriented, and committed to both days',
+                  'Physically Ready: Able to stand and walk for extended periods'
+                ].map((req, i) => (
+                  <div key={i} className="flex items-start gap-2">
+                    <CheckCircle className="w-5 h-5 text-copper flex-shrink-0 mt-0.5" />
+                    <span className="text-cream/70 text-sm">{req}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="p-4 bg-black/30 rounded-lg mb-8">
+              <p className="text-cream/70 text-sm">
+                <span className="text-copper font-semibold">Mandatory:</span> Virtual training call on February 10<br />
+                <span className="text-copper font-semibold">Required:</span> Return all remaining materials at end of activation
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link href="/talent/nyc-street-activation">
+                <motion.a
+                  className="inline-flex items-center justify-center gap-3 bg-copper hover:bg-copper-light text-black font-mono text-sm uppercase tracking-wider px-8 py-4 transition-all cursor-pointer"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Apply for This Position
+                  <ArrowRight size={18} />
+                </motion.a>
+              </Link>
+              <a
+                href="mailto:crew@immerseforge.com?subject=NYC Street Activation Application"
+                className="inline-flex items-center justify-center gap-3 border border-copper text-copper hover:bg-copper/10 font-mono text-sm uppercase tracking-wider px-8 py-4 transition-all"
+              >
+                Email Application
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
 
