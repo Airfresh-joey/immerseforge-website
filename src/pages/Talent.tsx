@@ -1,5 +1,5 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { Users, Calendar, DollarSign, Briefcase, MapPin, Star, Sparkles, Zap, ArrowRight, CheckCircle } from 'lucide-react';
 import { TalentApplicationForm } from '../components/TalentApplicationForm';
 import { Link } from 'wouter';
@@ -86,6 +86,10 @@ const stats = [
 
 export function Talent({ content }: TalentProps) {
   const formRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const scrollToForm = () => {
     formRef.current?.scrollIntoView({ behavior: 'smooth' });
