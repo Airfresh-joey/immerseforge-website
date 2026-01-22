@@ -60,9 +60,8 @@ const skillOptions = [
   'Sales'
 ];
 
-// Formspree form ID for talent applications
-// Create a new form at formspree.io and replace this ID
-const FORMSPREE_FORM_ID = 'mlggdrdr';
+// Formspree form ID for BA applications
+const FORMSPREE_FORM_ID = 'mpqqeyrn';
 
 export function TalentApplicationForm() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
