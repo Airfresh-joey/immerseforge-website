@@ -45,7 +45,15 @@ export const TradeShowProduction = () => {
     <div className="min-h-screen bg-black">
       {/* Hero Section */}
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-charcoal via-black to-charcoal" />
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img
+            src="/images/case-studies/microsoft.jpg"
+            alt="Trade Show Production"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black" />
+        </div>
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full"
           style={{
