@@ -611,7 +611,7 @@ export function TalentApplicationForm() {
         </AnimatePresence>
 
         {/* Navigation Buttons */}
-        {currentStep < STEPS.length && (
+        {currentStep < STEPS.length && submitStatus !== 'success' && (
           <div className="flex justify-between mt-10 pt-6 border-t border-white/10">
             <button
               onClick={prevStep}
@@ -631,7 +631,15 @@ export function TalentApplicationForm() {
                 onClick={nextStep}
                 className="flex items-center gap-2 bg-copper hover:bg-copper-light text-black font-mono text-sm uppercase tracking-wider px-6 py-3 transition-all"
               >
-                Next
+                {currentStep === STEPS.length - 2 ? 'Review' : 'Next'}
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            ) : currentStep === STEPS.length - 1 ? (
+              <button
+                onClick={nextStep}
+                className="flex items-center gap-2 bg-copper hover:bg-copper-light text-black font-mono text-sm uppercase tracking-wider px-6 py-3 transition-all"
+              >
+                Continue to Submit
                 <ChevronRight className="w-4 h-4" />
               </button>
             ) : null}
