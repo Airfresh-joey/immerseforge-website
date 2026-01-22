@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Loader2, AlertCircle, ChevronRight, ChevronLeft, User, FileText, Briefcase, Camera, MapPin } from 'lucide-react';
 
@@ -120,11 +120,19 @@ const inputClassName = "w-full bg-black/30 border border-white/10 rounded-lg px-
 const labelClassName = "block font-mono text-xs uppercase tracking-wider text-cream/50 mb-2";
 
 export function TalentApplicationForm() {
+  const formRef = useRef<HTMLDivElement>(null);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+
+  // Scroll to top of form on step change
+  const scrollToForm = () => {
+    setTimeout(() => {
+      formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -163,11 +171,13 @@ export function TalentApplicationForm() {
   const nextStep = () => {
     if (validateStep(currentStep)) {
       setCurrentStep(prev => Math.min(prev + 1, STEPS.length));
+      scrollToForm();
     }
   };
 
   const prevStep = () => {
     setCurrentStep(prev => Math.max(prev - 1, 1));
+    scrollToForm();
   };
 
   const handleSubmit = async () => {
@@ -556,6 +566,7 @@ export function TalentApplicationForm() {
 
   return (
     <motion.div
+      ref={formRef}
       className="max-w-4xl mx-auto"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
