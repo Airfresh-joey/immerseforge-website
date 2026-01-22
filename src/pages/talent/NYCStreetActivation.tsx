@@ -22,13 +22,15 @@ export function NYCStreetActivation() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
-            src="/images/case-studies/formula-1.jpg"
+            src="/images/case-studies/street-team.jpg"
             alt="Brand Ambassador Street Team"
-            className="w-full h-full object-cover object-top"
+            className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black" />
+          {/* Gold/Copper tint overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#c77b35]/30 via-[#c77b35]/20 to-black/90" />
+          <div className="absolute inset-0 bg-black/40" />
         </div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-copper/15 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-copper/20 via-transparent to-transparent" />
 
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center pt-32 pb-20">
           <motion.div
