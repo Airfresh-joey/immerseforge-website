@@ -105,7 +105,7 @@ async function uploadFileToNotion(file: { name: string; data: Buffer; type: stri
 
     // Step 2: Upload the file content
     const formData = new FormData();
-    formData.append('file', new Blob([file.data], { type: file.type }), file.name);
+    formData.append('file', new Blob([new Uint8Array(file.data)], { type: file.type }), file.name);
 
     const uploadResponse = await fetch(upload_url, {
       method: 'POST',
